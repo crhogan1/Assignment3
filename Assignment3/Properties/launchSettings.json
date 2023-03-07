@@ -23,6 +23,15 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
+    },
+    "“configurations”": {
+      {
+        "......": null,
+        "“env”": {
+          "“ASPNETCORE_ENVIRONMENT”": "“Development”"
+        },
+        "......"
+      }
     }
   }
 }
