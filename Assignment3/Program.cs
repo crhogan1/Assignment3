@@ -1,4 +1,5 @@
 using Assignment3.Data;
+using Assignment3.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Tweetinvi;
@@ -25,7 +26,6 @@ namespace Assignment3
             //}
 
             //Console.WriteLine("Average compound score: " + tweetTotal / tweets.Lengths);
-            //add Task to method instead of void or whatever
 
             var builder = WebApplication.CreateBuilder(args);
 
@@ -67,6 +67,11 @@ namespace Assignment3
             app.MapRazorPages();
 
             app.Run();
+
+            //MovieTweetsVM movieVM = new MovieTweetsVM();
+            //movieVM.CompoundSentiment();
         }
+
+
     }
 }

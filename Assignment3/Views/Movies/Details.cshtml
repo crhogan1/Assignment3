@@ -1,0 +1,94 @@
+﻿@using System.ComponentModel;
+@using Tweetinvi;
+@using VaderSharp2;
+@model Assignment3.Models.MovieTweetsVM
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha384-Ft/vb48LwsAEtgltj7o+6vtS2esTU9PCpDqcXs4OCVQFZu5BqprHtUCZ4kjK+bpE" crossorigin="anonymous"></script>
+<link href="https://cdn.datatables.net/1.13.3/css/jquery.dataTables.css">
+*@
+
+<h1>Details</h1>
+
+<div>
+    <h4>Movie</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Movie.Title)
+            
+        
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Movie.Title)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Movie.IMDBurl)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Movie.IMDBurl)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Movie.Genre)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Movie.Genre)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Movie.Year)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Movie.Year)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Movie.Photo)
+        </dt>
+        <dd class="col-sm-10">
+            @if (Model.Movie.Photo != null)
+            {
+                <img width="100" height="100" src="@Url.Action("GetMoviePhoto", "Movies", new {Model.Movie.Id})" />
+            }
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Movie.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+
+
+<h1>Tweets</h1>
+
+<p>Overall Score: @Model.CompoundSentiment()</p>
+
+<table id="myTable" class="">
+<thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MovieResults[0].Tweet )
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MovieResults[0].Sentiment )
+        </th>
+    </tr>
+</thead>
+<tbody>
+        @foreach (var item in Model.MovieResults)
+        {
+            <tr>
+                <td>@item.Tweet</td>
+                <td>@item.Sentiment</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+
+            
+
+ 

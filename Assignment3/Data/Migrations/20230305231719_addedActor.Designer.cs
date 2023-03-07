@@ -4,6 +4,7 @@ using Assignment3.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Assignment3.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230305231719_addedActor")]
+    partial class addedActor
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,11 +38,8 @@ namespace Assignment3.Data.Migrations
                     b.Property<string>("Gender")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("IMDBurl")
+                    b.Property<string>("IMBDurl")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("MovieId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -53,25 +52,6 @@ namespace Assignment3.Data.Migrations
                     b.ToTable("Actor");
                 });
 
-            modelBuilder.Entity("Assignment3.Models.ActorTweets", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
-
-                    b.Property<double>("Sentiment")
-                        .HasColumnType("float");
-
-                    b.Property<string>("Tweet")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("ActorTweets");
-                });
-
             modelBuilder.Entity("Assignment3.Models.Movie", b =>
                 {
                     b.Property<int>("Id")
@@ -79,9 +59,6 @@ namespace Assignment3.Data.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int?>("ActorId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Genre")
                         .HasColumnType("nvarchar(max)");
@@ -101,48 +78,6 @@ namespace Assignment3.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Movie");
-                });
-
-            modelBuilder.Entity("Assignment3.Models.MovieActor", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int?>("ActorID")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("MovieID")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ActorID");
-
-                    b.HasIndex("MovieID");
-
-                    b.ToTable("MovieActor");
-                });
-
-            modelBuilder.Entity("Assignment3.Models.MovieTweets", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<double>("Sentiment")
-                        .HasColumnType("float");
-
-                    b.Property<string>("Tweet")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("MovieTweets");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -345,21 +280,6 @@ namespace Assignment3.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
-                });
-
-            modelBuilder.Entity("Assignment3.Models.MovieActor", b =>
-                {
-                    b.HasOne("Assignment3.Models.Actor", "Actor")
-                        .WithMany()
-                        .HasForeignKey("ActorID");
-
-                    b.HasOne("Assignment3.Models.Movie", "Movie")
-                        .WithMany()
-                        .HasForeignKey("MovieID");
-
-                    b.Navigation("Actor");
-
-                    b.Navigation("Movie");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
